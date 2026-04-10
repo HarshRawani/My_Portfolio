@@ -1,0 +1,39 @@
+# Virtual Environment
+.myenv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+db.sqlite3
+*.sqlite3
+
+# Media files (user uploads)
+media/
+
+# Environment variables
+.env
+.env.*
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Logs
+*.log
+
+# Collected static (if using collectstatic)
+staticfiles/

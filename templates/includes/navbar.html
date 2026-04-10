@@ -1,0 +1,50 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'images/logo.png' %}" 
+           alt="Logo" 
+           width="30" 
+           height="24"
+           class="d-inline-block align-text-top">
+      My Portfolio
+    </a>
+
+    <!-- Mobile Toggle Button -->
+    <button class="navbar-toggler" type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">  <!-- Right aligned -->
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'home' %}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About Us</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+        </li>
+
+        {% comment %} <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li> {% endcomment %}
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
