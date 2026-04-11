@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Project
+from .models import Project,Contact
 
 # Create your views here.
 def home(request):
@@ -11,16 +11,22 @@ def about(request):
     return render(request,'about.html')
 
 def contact(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        subject = request.POST.get("subject")
-        message = request.POST.get("message")
+    if request.method == 'POST':
+        name    = request.POST.get('name', '').strip()
+        email   = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
 
-        # You can save to DB or send email here
-        print(name, email, subject, message)
+        if name and email and message:          # basic validation
+            Contact.objects.create(
+                name    = name,
+                email   = email,
+                subject = subject,
+                message = message,
+            )
+            messages.success(request, 'Message sent successfully!')
+            return redirect('contact')
+        else:
+            messages.error(request, 'Please fill in all required fields.')
 
-        messages.success(request, "Your message has been sent successfully!")
-        return redirect("contact")
-
-    return render(request, "contact.html")
+    return render(request, 'contact.html')
