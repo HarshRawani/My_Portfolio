@@ -1,33 +1,28 @@
-# portfolio/utils.py
-from imagekitio import ImageKit
+import re, requests
 from django.conf import settings
-import re
 
-def get_imagekit_client():
-    return ImageKit(
-        private_key  = settings.IMAGEKIT_PRIVATE_KEY,
-        public_key   = settings.IMAGEKIT_PUBLIC_KEY,
-        url_endpoint = settings.IMAGEKIT_URL_ENDPOINT,
-    )
-
-def upload_to_imagekit(image_file, project_title):
-    """
-    Uploads a file to ImageKit.
-    Saves it in /projects/<project-slug>/ folder.
-    Returns the CDN URL string.
-    """
-    ik = get_imagekit_client()
-
-    # Turn "My Cool Project!" → "my-cool-project"
+def upload_to_imagekit(django_image_field, project_title):
     slug = re.sub(r'[^a-z0-9]+', '-', project_title.lower()).strip('-')
-    folder = f"/projects/{slug}/"
 
-    result = ik.upload_file(
-        file=image_file,            # accepts file object or base64
-        file_name=image_file.name,
-        options={
-            "folder": folder,
-            "use_unique_file_name": True,  # avoids name collisions
+    raw_name  = django_image_field.name or "upload.jpg"
+    file_name = raw_name.split('/')[-1]
+
+    django_image_field.seek(0)
+
+    # ImageKit Upload REST API — no SDK needed
+    response = requests.post(
+        "https://upload.imagekit.io/api/v1/files/upload",
+        auth=(settings.IMAGEKIT_PRIVATE_KEY, ""),  # private key as username, empty password
+        data={
+            "fileName": file_name,
+            "folder"  : f"/projects/{slug}/",
+        },
+        files={
+            "file": (file_name, django_image_field.read()),
         }
     )
-    return result.url
+
+    if response.status_code != 200:
+        raise Exception(f"ImageKit upload failed: {response.text}")
+
+    return response.json()["url"]
