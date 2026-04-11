@@ -1,8 +1,114 @@
 {% extends "base.html" %}
-
-{% block content %}
 {% load static %}
 
+{% block content %}
 
+<!-- Hero -->
+<section class="bg-dark text-white py-5">
+  <div class="container text-center py-3">
+    <img src="{% static 'images/logo.png' %}" 
+         alt="Profile" 
+         class="rounded-circle mb-4 border border-3 border-primary"
+         style="width:120px; height:120px; object-fit:cover;">
+    <h1 class="fw-bold">Hi, I'm HARSH KUMAR RAWANI 👋</h1>
+    <p class="lead text-secondary mt-2">
+      Full Stack Developer &nbsp;·&nbsp; Django Enthusiast &nbsp;·&nbsp; Open Source Lover
+    </p>
+    <div class="mt-3 d-flex justify-content-center gap-3">
+      <a href="https://github.com/HarshRawani/" target="_blank" class="btn btn-outline-light btn-sm">
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/harsh-kumar-rawani-ba7499247/" target="_blank" class="btn btn-outline-primary btn-sm">
+        LinkedIn
+      </a>
+      <a href="{% url 'contact' %}" class="btn btn-primary btn-sm">
+        Hire Me
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- About Me -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">About Me</h2>
+        <p class="text-muted">
+          I'm a passionate developer based in Kolkata, India. I love building
+          clean, functional web applications that solve real problems.
+        </p>
+        <p class="text-muted">
+          I started my journey with Python and quickly fell in love with Django's
+          "batteries included" philosophy. When I'm not coding, you'll find me
+          exploring new technologies or contributing to open source.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-primary mt-2">Get In Touch →</a>
+      </div>
+      <div class="col-md-6">
+        <div class="row g-3 text-center">
+          <div class="col-6">
+            <div class="p-4 rounded-3 bg-primary bg-opacity-10 border border-primary border-opacity-25">
+              <h3 class="fw-bold text-primary">3+</h3>
+              <p class="text-muted mb-0 small">Projects Built</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-4 rounded-3 bg-success bg-opacity-10 border border-success border-opacity-25">
+              <h3 class="fw-bold text-success">-</h3>
+              <p class="text-muted mb-0 small">Years Experience</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-4 rounded-3 bg-warning bg-opacity-10 border border-warning border-opacity-25">
+              <h3 class="fw-bold text-warning">10+</h3>
+              <p class="text-muted mb-0 small">Technologies</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-4 rounded-3 bg-danger bg-opacity-10 border border-danger border-opacity-25">
+              <h3 class="fw-bold text-danger">∞</h3>
+              <p class="text-muted mb-0 small">Cups of Coffee</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5">Tech Stack</h2>
+    <div class="row g-3 text-center">
+
+      {% for skill in skills %}
+      <div class="col-6 col-md-3 col-lg-2">
+        <div class="p-3 bg-white rounded-3 shadow-sm h-100">
+          <div class="fs-2">{{ skill.icon }}</div>
+          <p class="mb-1 fw-semibold small">{{ skill.name }}</p>
+          <div class="progress" style="height:4px;">
+            <div class="progress-bar bg-primary" style="width:{{ skill.level }}%"></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 bg-dark text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold">Let's Build Something Together</h2>
+    <p class="text-secondary mt-2 mb-4">
+      I'm currently open to freelance work and full-time opportunities.
+    </p>
+    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg me-3">Contact Me</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-light btn-lg">View Projects</a>
+  </div>
+</section>
 
 {% endblock content %}

@@ -8,7 +8,17 @@ def home(request):
     return render(request, 'home.html', {'projects': projects})
 
 def about(request):
-    return render(request,'about.html')
+    skills = [
+        {"name": "Python",     "icon": "🐍", "level": 90},
+        {"name": "Django",     "icon": "🎸", "level": 80},
+        {"name": "JavaScript", "icon": "⚡", "level": 50},
+        {"name": "HTML/CSS",   "icon": "🎨", "level": 70},
+        {"name": "PostgreSQL", "icon": "🗄️", "level": 75},
+        {"name": "Git",        "icon": "🔀", "level": 80},
+        {"name": "Bootstrap",  "icon": "📐", "level": 85},
+        {"name": "REST APIs",  "icon": "🔗", "level": 50},
+    ]
+    return render(request, 'about.html', {'skills': skills})
 
 def contact(request):
     if request.method == 'POST':
