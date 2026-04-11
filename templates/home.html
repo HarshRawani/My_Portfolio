@@ -3,7 +3,6 @@
 {% block content %}
 {% load static %}
 
-
 <div class="container mt-4">
   <div class="row g-4">
 
@@ -11,8 +10,8 @@
     <div class="col-md-4 d-flex">
       <div class="card w-100">
 
-        {% if item.image %}
-          <img src="{{ item.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+        {% if item.image_url %}
+          <img src="{{ item.image_url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
         {% else %}
           <img src="{% static 'images/default.jpg' %}" class="card-img-top" style="height: 200px; object-fit: cover;">
         {% endif %}        
@@ -36,6 +35,5 @@
 
   </div>
 </div>
-    
 
 {% endblock content %}
