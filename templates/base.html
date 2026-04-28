@@ -2,17 +2,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <title>My Portfolio</title>
-    {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endcomment %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Harsh Kumar Rawani — Developer{% endblock %}</title>
+  <meta name="description" content="Full Stack Developer based in Kolkata, India. Django, Python, and web technologies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    {% include "includes/navbar.html" %}
-    
-    {% block content %}
-        
-    {% endblock content %}
-    {% include "includes/footer.html" %}
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+{% include "includes/navbar.html" %}
+
+<main class="pf-page">
+  {% block content %}{% endblock %}
+</main>
+
+{% include "includes/footer.html" %}
+
+<script>
+/* Scroll reveal */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.pf-reveal').forEach(el => obs.observe(el));
+
+/* Skill bar animation */
+const skillObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.pf-skill-card__fill').forEach(bar => {
+        bar.style.width = bar.dataset.level + '%';
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.pf-skills-grid').forEach(el => skillObs.observe(el));
+</script>
+
+{% block extra_js %}{% endblock %}
 </body>
 </html>
