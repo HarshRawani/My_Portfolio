@@ -1,10 +1,19 @@
 from django.db import models
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=7, default='#a78bfa')
+
+    def __str__(self):
+        return self.name
 
 class Project(models.Model):
     title       = models.CharField(max_length=200)
     description = models.TextField()
     link        = models.URLField(blank=True, null=True)
+    tags        = models.ManyToManyField(Tag, blank=True)
+    is_archived = models.BooleanField(default=False)
+
 
     def get_main_image_url(self):
         main = self.images.filter(is_main=True).first()

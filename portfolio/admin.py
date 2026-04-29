@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Project, ProjectImage, Contact
+from .models import Project, ProjectImage, Contact,Tag  
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -20,13 +20,18 @@ class ProjectImageInline(admin.TabularInline):
         return '—'
     thumbnail.short_description = 'Preview'
 
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color')
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'image_count', 'has_main_image', 'link')
+    list_display = ('title', 'is_archived', 'image_count', 'has_main_image', 'link')  
+    list_editable = ('is_archived',)  
+    filter_horizontal = ('tags',)
     inlines      = [ProjectImageInline]
     fieldsets    = (
-        ('Project Details', {'fields': ('title', 'description', 'link')}),
+        ('Project Details', {'fields': ('title', 'is_archived', 'description', 'link', 'tags')}), 
     )
 
     def image_count(self, obj):

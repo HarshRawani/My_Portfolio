@@ -4,7 +4,7 @@ from .models import Project, Contact
 
 
 def home(request):
-    projects = Project.objects.prefetch_related('images').all()
+    projects = Project.objects.prefetch_related('images', 'tags').filter(is_archived=False)
     return render(request, 'home.html', {'projects': projects})
 
 
