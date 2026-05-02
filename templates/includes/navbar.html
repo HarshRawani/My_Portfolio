@@ -14,7 +14,7 @@
     <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
     <li><a href="{% url 'contact' %}" class="pf-nav__cta">Hire Me</a></li>
     {% if resume %}
-      <li><a href="{{ resume.file.url }}" download class="btn-pf btn-pf--download">↓ Resume</a></li>
+      <li><a href="{{ resume.get_url }}" target="_blank" class="btn-pf btn-pf--download">↓ Resume</a></li>
     {% endif %}
   </ul>
 </nav>

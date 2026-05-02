@@ -79,11 +79,19 @@ class Contact(models.Model):
     
 
 class Resume(models.Model):
-    file       = models.FileField(upload_to='resume/')
+    file       = models.FileField(upload_to='resume/', blank=True, null=True)
+    file_url   = models.URLField(blank=True, null=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.file and not self.file_url:
+            from .utils import upload_resume_to_imagekit
+            self.file_url = upload_resume_to_imagekit(self.file)
+            self.file = None
+        super().save(*args, **kwargs)
+
+    def get_url(self):
+        return self.file_url or ''
 
     def __str__(self):
         return f"Resume (updated {self.updated_at.strftime('%d %b %Y')})"
-
-    class Meta:
-        verbose_name = 'Resume'

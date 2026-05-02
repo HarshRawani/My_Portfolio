@@ -26,7 +26,7 @@
         <a href="https://www.linkedin.com/in/harsh-kumar-rawani-ba7499247/" target="_blank" class="btn-pf btn-pf--outline">LinkedIn</a>
         <a href="{% url 'contact' %}" class="btn-pf btn-pf--outline">Get in Touch</a>
         {% if resume %}
-          <a href="{{ resume.file.url }}" download class="btn-pf btn-pf--download">↓ Download Resume</a>
+          <a href="{{ resume.get_url }}" target="_blank" class="btn-pf btn-pf--download">↓ Download Resume</a>
         {% endif %}
       </div>
     </div>
