@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Project, ProjectImage, Contact,Tag  
+from .models import Project, ProjectImage, Contact,Tag , Resume   
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -47,3 +47,8 @@ class ProjectAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display    = ('name', 'email', 'subject', 'created_at')
     readonly_fields = ('created_at',)
+
+
+@admin.register(Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'updated_at')

@@ -13,7 +13,9 @@
     <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Projects</a></li>
     <li><a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
     <li><a href="{% url 'contact' %}" class="pf-nav__cta">Hire Me</a></li>
-    <li><a href="{% static 'files/harsh_rawani_resume.pdf' %}" download class="btn-pf btn-pf--download">↓ Resume</a></li>
+    {% if resume %}
+      <li><a href="{{ resume.file.url }}" download class="btn-pf btn-pf--download">↓ Resume</a></li>
+    {% endif %}
   </ul>
 </nav>
 

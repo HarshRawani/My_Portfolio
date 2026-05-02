@@ -25,7 +25,9 @@
         <a href="https://github.com/HarshRawani/" target="_blank" class="btn-pf btn-pf--primary">GitHub</a>
         <a href="https://www.linkedin.com/in/harsh-kumar-rawani-ba7499247/" target="_blank" class="btn-pf btn-pf--outline">LinkedIn</a>
         <a href="{% url 'contact' %}" class="btn-pf btn-pf--outline">Get in Touch</a>
-        <a href="{% static 'files/harsh_rawani_resume.pdf' %}" download class="btn-pf btn-pf--download">↓ Download Resume</a>
+        {% if resume %}
+          <a href="{{ resume.file.url }}" download class="btn-pf btn-pf--download">↓ Download Resume</a>
+        {% endif %}
       </div>
     </div>
 
